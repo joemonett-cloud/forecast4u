@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
-import Home from './pages/Home'
-import WeatherForecast from './pages/WeatherForecast'
+import Home from './pages/Home.jsx'
+import WeatherForecast from './pages/WeatherForecast.jsx'
 
 function App() {
   return (

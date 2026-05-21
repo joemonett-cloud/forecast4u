@@ -10,7 +10,7 @@ import {
   Tile,
 } from '@carbon/react'
 import { ArrowLeft } from '@carbon/icons-react'
-import ForecastCard from '../components/ForecastCard'
+import ForecastCard from '../components/ForecastCard.jsx'
 import './WeatherForecast.css'
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY
