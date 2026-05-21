@@ -1,10 +1,10 @@
 import { Tile, Stack } from '@carbon/react'
 import {
-  CloudDrizzle,
-  CloudRain,
-  CloudSnow,
-  Cloudy,
-  CloudFog,
+  RainDrizzle,
+  Rain,
+  Snow,
+  MostlyCloudy,
+  PartlyCloudy,
   Sunny,
   Humidity,
   Wind,
@@ -14,22 +14,22 @@ import './ForecastCard.css'
 
 const getWeatherIcon = (iconCode) => {
   const iconProps = { size: 32, className: 'weather-icon' }
-  
+
   switch (true) {
     case iconCode.includes('01'):
       return <Sunny {...iconProps} />
-    case iconCode.includes('02') || iconCode.includes('03'):
-      return <Cloudy {...iconProps} />
-    case iconCode.includes('04'):
-      return <CloudFog {...iconProps} />
-    case iconCode.includes('09') || iconCode.includes('10'):
-      return <CloudRain {...iconProps} />
-    case iconCode.includes('11'):
-      return <CloudDrizzle {...iconProps} />
+    case iconCode.includes('02'):
+      return <PartlyCloudy {...iconProps} />
+    case iconCode.includes('03') || iconCode.includes('04'):
+      return <MostlyCloudy {...iconProps} />
+    case iconCode.includes('09'):
+      return <RainDrizzle {...iconProps} />
+    case iconCode.includes('10') || iconCode.includes('11'):
+      return <Rain {...iconProps} />
     case iconCode.includes('13'):
-      return <CloudSnow {...iconProps} />
+      return <Snow {...iconProps} />
     default:
-      return <Cloudy {...iconProps} />
+      return <MostlyCloudy {...iconProps} />
   }
 }
 
