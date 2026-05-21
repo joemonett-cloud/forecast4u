@@ -8,7 +8,7 @@ import {
   Sunny,
   Humidity,
   Wind,
-  Eye,
+  View,
 } from '@carbon/icons-react'
 import './ForecastCard.css'
 
@@ -95,7 +95,7 @@ export default function ForecastCard({ data }) {
             </div>
 
             <div className="detail-item">
-              <Eye size={20} />
+              <View size={20} />
               <div className="detail-text">
                 <p className="detail-label">Visibility</p>
                 <p className="detail-value">{visibility} km</p>
