@@ -5,7 +5,7 @@ import {
   Snow,
   MostlyCloudy,
   PartlyCloudy,
-  SunnyFilled,
+  Sunny,
   Humidity,
   Wind,
   View,
@@ -17,7 +17,7 @@ const getWeatherIcon = (iconCode) => {
 
   switch (true) {
     case iconCode.includes('01'):
-      return <SunnyFilled {...iconProps} />
+      return <Sunny {...iconProps} />
     case iconCode.includes('02'):
       return <PartlyCloudy {...iconProps} />
     case iconCode.includes('03') || iconCode.includes('04'):
