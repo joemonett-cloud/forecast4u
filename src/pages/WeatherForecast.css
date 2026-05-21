@@ -1,0 +1,64 @@
+.forecast-container {
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f0f4f8 0%, #e8f1f7 100%);
+}
+
+.header-section {
+  margin-bottom: 2rem;
+  padding: 1rem 0;
+}
+
+.back-button {
+  margin-bottom: 1rem;
+}
+
+.location-info {
+  padding: 1rem 0;
+}
+
+.location-info h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #161616;
+}
+
+.location-info p {
+  font-size: 1.125rem;
+  color: #525252;
+  margin: 0;
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.forecast-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f0f4f8 0%, #e8f1f7 100%);
+}
+
+@media (max-width: 768px) {
+  .forecast-container {
+    padding: 1rem;
+  }
+
+  .location-info h1 {
+    font-size: 1.75rem;
+  }
+
+  .location-info p {
+    font-size: 1rem;
+  }
+
+  .forecast-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
