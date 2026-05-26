@@ -5,9 +5,9 @@ import {
   Snow,
   MostlyCloudy,
   PartlyCloudy,
-  SunFilled,
+  Sun,
   Humidity,
-  Wind,
+  WindGusts,
   View,
 } from '@carbon/icons-react'
 import './ForecastCard.css'
@@ -17,7 +17,7 @@ const getWeatherIcon = (iconCode) => {
 
   switch (true) {
     case iconCode.includes('01'):
-      return <SunFilled {...iconProps} />
+      return <Sun {...iconProps} />
     case iconCode.includes('02'):
       return <PartlyCloudy {...iconProps} />
     case iconCode.includes('03') || iconCode.includes('04'):
@@ -87,7 +87,7 @@ export default function ForecastCard({ data }) {
             </div>
 
             <div className="detail-item">
-              <Wind size={20} />
+              <WindGusts size={20} />
               <div className="detail-text">
                 <p className="detail-label">Wind</p>
                 <p className="detail-value">{windSpeed} km/h</p>
