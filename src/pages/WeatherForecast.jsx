@@ -11,6 +11,7 @@ import {
 } from '@carbon/react'
 import { ArrowLeft } from '@carbon/icons-react'
 import ForecastCard from '../components/ForecastCard.jsx'
+import { getWeatherBackgroundClass, getCurrentWeatherIcon } from '../utils/weatherBackgrounds.js'
 import './WeatherForecast.css'
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY
@@ -22,6 +23,7 @@ export default function WeatherForecast() {
   const [location, setLocation] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [backgroundClass, setBackgroundClass] = useState('weather-bg-default')
 
   useEffect(() => {
     const fetchForecast = async () => {
@@ -57,6 +59,11 @@ export default function WeatherForecast() {
 
         const forecastData = await forecastResponse.json()
         setForecast(forecastData.list)
+        // Set background based on current weather
+        if (forecastData.list && forecastData.list.length > 0) {
+          const weatherIcon = forecastData.list[0].weather[0].icon
+          setBackgroundClass(getWeatherBackgroundClass(weatherIcon))
+        }
       } catch (err) {
         setError(err.message)
         setForecast(null)
@@ -78,7 +85,7 @@ export default function WeatherForecast() {
 
   if (error) {
     return (
-      <div className="forecast-container">
+      <div className={`forecast-container ${backgroundClass}`}>
         <Grid>
           <Column lg={8} md={6} sm={4}>
             <Button
@@ -103,7 +110,7 @@ export default function WeatherForecast() {
   }
 
   return (
-    <div className="forecast-container">
+    <div className={`forecast-container ${backgroundClass}`}>
       <Grid>
         <Column lg={12} md={8} sm={4}>
           <Stack gap={6} orientation="horizontal" className="header-section">
