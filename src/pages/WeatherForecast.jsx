@@ -24,6 +24,7 @@ export default function WeatherForecast() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [backgroundClass, setBackgroundClass] = useState('weather-bg-default')
+  const [isNight, setIsNight] = useState(false)
 
   useEffect(() => {
     const fetchForecast = async () => {
@@ -63,6 +64,7 @@ export default function WeatherForecast() {
         if (forecastData.list && forecastData.list.length > 0) {
           const weatherIcon = forecastData.list[0].weather[0].icon
           setBackgroundClass(getWeatherBackgroundClass(weatherIcon))
+          setIsNight(weatherIcon.endsWith('n'))
         }
       } catch (err) {
         setError(err.message)
@@ -85,7 +87,11 @@ export default function WeatherForecast() {
 
   if (error) {
     return (
-      <div className={`forecast-container ${backgroundClass}`}>
+      <div className={`forecast-page ${backgroundClass}`}>
+        <div className="forecast-nav-bar">
+          <div className="nav-brand">Forecast4U</div>
+          <div className="nav-location">{zip}</div>
+        </div>
         <Grid>
           <Column lg={8} md={6} sm={4}>
             <Button
@@ -110,41 +116,39 @@ export default function WeatherForecast() {
   }
 
   return (
-    <div className={`forecast-container ${backgroundClass}`}>
-      <Grid>
-        <Column lg={12} md={8} sm={4}>
-          <Stack gap={6} orientation="horizontal" className="header-section">
-            <Button
-              kind="ghost"
-              onClick={() => navigate('/')}
-              renderIcon={ArrowLeft}
-              size="sm"
-            >
-              Back
-            </Button>
-            {location && (
-              <div className="location-info">
-                <h1>
-                  {location.name}, {location.country}
-                </h1>
-                <p>5-Day Forecast (3-hour increments)</p>
-              </div>
-            )}
-          </Stack>
-        </Column>
-      </Grid>
-
-      <Grid className="forecast-grid">
-        {forecast && forecast.length > 0 ? (
-          forecast.map((item) => (
-            <ForecastCard key={item.dt} data={item} />
-          ))
-        ) : (
-          <Column lg={4} md={4} sm={4}>
-            <Tile>No forecast data available</Tile>
-          </Column>
+    <div className={`forecast-page ${backgroundClass} ${isNight ? 'night-mode' : ''}`}>
+      <div className="forecast-nav-bar">
+        <div className="nav-brand">Forecast4U</div>
+        {location && (
+          <div className="nav-location">
+            {location.name}, {location.country}
+          </div>
         )}
-      </Grid>
+      </div>
+
+      <div className="forecast-content">
+        <Grid className="forecast-grid">
+          {forecast && forecast.length > 0 ? (
+            forecast.map((item) => (
+              <ForecastCard key={item.dt} data={item} />
+            ))
+          ) : (
+            <Column lg={4} md={4} sm={4}>
+              <Tile>No forecast data available</Tile>
+            </Column>
+          )}
+        </Grid>
+      </div>
+
+      <Button
+        kind="ghost"
+        onClick={() => navigate('/')}
+        renderIcon={ArrowLeft}
+        size="sm"
+        className="floating-back-button"
+      >
+        Back
+      </Button>
     </div>
   )
 }

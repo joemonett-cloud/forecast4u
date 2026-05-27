@@ -13,7 +13,7 @@ import {
 import './ForecastCard.css'
 
 const getWeatherIcon = (iconCode) => {
-  const iconProps = { size: 32, className: 'weather-icon' }
+  const iconProps = { size: 48, className: 'forecast-weather-icon' }
 
   switch (true) {
     case iconCode.includes('01'):
@@ -56,54 +56,60 @@ export default function ForecastCard({ data }) {
   })
 
   return (
-    <div className="forecast-card-column">
-      <Tile className="forecast-card">
-        <Stack gap={4}>
-          <div className="forecast-date-time">
-            <p className="day-date">{dayDate}</p>
-            <p className="time">{time}</p>
+    <div className="forecast-card-wrapper">
+      <div className="forecast-card-glass">
+        <div className="forecast-card-content">
+          <div className="card-datetime">
+            <p className="card-day-date">{dayDate}</p>
+            <p className="card-time">{time}</p>
           </div>
 
-          <div className="forecast-icon-section">
+          <div className="card-icon-container">
             {getWeatherIcon(data.weather[0].icon)}
-            <p className="weather-description">{description}</p>
+            <p className="card-weather-description">{description}</p>
           </div>
 
-          <div className="forecast-temps">
-            <div className="temp-main">
-              <span className="temp-value">{temp}°</span>
-              <span className="temp-label">C</span>
+          <div className="card-temperature-section">
+            <div className="card-main-temp">
+              <span className="card-temp-value">{temp}</span>
+              <span className="card-temp-unit">°C</span>
             </div>
-            <p className="feels-like">Feels like {feelsLike}°</p>
+            <p className="card-feels-like">Feels like {feelsLike}°</p>
           </div>
 
-          <div className="forecast-details">
-            <div className="detail-item">
-              <Humidity size={20} />
-              <div className="detail-text">
-                <p className="detail-label">Humidity</p>
-                <p className="detail-value">{humidity}%</p>
+          <div className="card-metrics">
+            <div className="metric-item">
+              <div className="metric-icon">
+                <Humidity size={20} />
+              </div>
+              <div className="metric-info">
+                <p className="metric-label">Humidity</p>
+                <p className="metric-value">{humidity}%</p>
               </div>
             </div>
 
-            <div className="detail-item">
-              <WindGusts size={20} />
-              <div className="detail-text">
-                <p className="detail-label">Wind</p>
-                <p className="detail-value">{windSpeed} km/h</p>
+            <div className="metric-item">
+              <div className="metric-icon">
+                <WindGusts size={20} />
+              </div>
+              <div className="metric-info">
+                <p className="metric-label">Wind</p>
+                <p className="metric-value">{windSpeed} km/h</p>
               </div>
             </div>
 
-            <div className="detail-item">
-              <View size={20} />
-              <div className="detail-text">
-                <p className="detail-label">Visibility</p>
-                <p className="detail-value">{visibility} km</p>
+            <div className="metric-item">
+              <div className="metric-icon">
+                <View size={20} />
+              </div>
+              <div className="metric-info">
+                <p className="metric-label">Visibility</p>
+                <p className="metric-value">{visibility} km</p>
               </div>
             </div>
           </div>
-        </Stack>
-      </Tile>
+        </div>
+      </div>
     </div>
   )
 }

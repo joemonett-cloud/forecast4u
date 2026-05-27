@@ -6,24 +6,28 @@
   padding: 2rem;
   background: linear-gradient(135deg, #87ceeb 0%, #e0f6ff 100%);
   transition: background 0.8s ease-in-out;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'IBM Plex Sans', sans-serif;
 }
 
 .home-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .home-header h1 {
-  font-size: 3rem;
-  font-weight: 600;
-  margin: 0 0 0.5rem 0;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
   color: #161616;
+  letter-spacing: -1px;
 }
 
 .home-header p {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   color: #525252;
   margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 .search-form {
@@ -46,11 +50,15 @@
   }
 
   .home-header h1 {
-    font-size: 2rem;
+    font-size: 2.25rem;
   }
 
   .home-header p {
-    font-size: 1rem;
+    font-size: 1.063rem;
+  }
+
+  .home-header {
+    margin-bottom: 2rem;
   }
 
   .search-input-wrapper {
