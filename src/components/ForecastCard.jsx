@@ -37,8 +37,8 @@ export default function ForecastCard({ data }) {
   const temp = Math.round(data.main.temp)
   const feelsLike = Math.round(data.main.feels_like)
   const humidity = data.main.humidity
-  const windSpeed = Math.round(data.wind.speed * 3.6) // Convert m/s to km/h
-  const visibility = (data.visibility / 1000).toFixed(1) // Convert to km
+  const windSpeed = Math.round(data.wind.speed)
+  const visibility = (data.visibility / 1609.34).toFixed(1) // Convert m to miles
   const description =
     data.weather[0].main.charAt(0).toUpperCase() +
     data.weather[0].main.slice(1)
@@ -72,9 +72,9 @@ export default function ForecastCard({ data }) {
           <div className="card-temperature-section">
             <div className="card-main-temp">
               <span className="card-temp-value">{temp}</span>
-              <span className="card-temp-unit">°C</span>
+              <span className="card-temp-unit">°F</span>
             </div>
-            <p className="card-feels-like">Feels like {feelsLike}°</p>
+            <p className="card-feels-like">Feels like {feelsLike}°F</p>
           </div>
 
           <div className="card-metrics">
@@ -94,7 +94,7 @@ export default function ForecastCard({ data }) {
               </div>
               <div className="metric-info">
                 <p className="metric-label">Wind</p>
-                <p className="metric-value">{windSpeed} km/h</p>
+                <p className="metric-value">{windSpeed} mph</p>
               </div>
             </div>
 
@@ -104,7 +104,7 @@ export default function ForecastCard({ data }) {
               </div>
               <div className="metric-info">
                 <p className="metric-label">Visibility</p>
-                <p className="metric-value">{visibility} km</p>
+                <p className="metric-value">{visibility} mi</p>
               </div>
             </div>
           </div>
