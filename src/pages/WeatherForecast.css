@@ -1,37 +1,77 @@
-.forecast-container {
+.forecast-page {
   min-height: 100vh;
-  padding: 2rem;
   background: linear-gradient(135deg, #f0f4f8 0%, #e8f1f7 100%);
   transition: background 0.8s ease-in-out;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'IBM Plex Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
-/* Clear Sky Background */
-.forecast-container.weather-bg-clear {
+/* Navigation Bar */
+.forecast-nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.nav-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #161616;
+  text-transform: capitalize;
+}
+
+.nav-location {
+  font-size: 0.938rem;
+  color: #525252;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Dark mode for night weather */
+.forecast-page.night-mode .forecast-nav-bar {
+  background: rgba(22, 22, 22, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.forecast-page.night-mode .nav-brand,
+.forecast-page.night-mode .nav-location {
+  color: #f4f4f4;
+}
+
+/* Background Variants */
+.forecast-page.weather-bg-clear {
   background: linear-gradient(135deg, #87ceeb 0%, #e0f6ff 100%);
 }
 
-/* Partly Cloudy Background */
-.forecast-container.weather-bg-partly-cloudy {
+.forecast-page.weather-bg-partly-cloudy {
   background: linear-gradient(135deg, #a8d8ea 0%, #f0f4f8 100%);
 }
 
-/* Cloudy Background */
-.forecast-container.weather-bg-cloudy {
+.forecast-page.weather-bg-cloudy {
   background: linear-gradient(135deg, #b0bec5 0%, #eceff1 100%);
 }
 
-/* Overcast Background */
-.forecast-container.weather-bg-overcast {
+.forecast-page.weather-bg-overcast {
   background: linear-gradient(135deg, #78909c 0%, #b0bec5 100%);
 }
 
-/* Rain Background */
-.forecast-container.weather-bg-rain {
+.forecast-page.weather-bg-rain {
   background: linear-gradient(135deg, #455a64 0%, #78909c 100%);
   position: relative;
 }
 
-.forecast-container.weather-bg-rain::before {
+.forecast-page.weather-bg-rain::before {
   content: '';
   position: fixed;
   top: 0;
@@ -56,19 +96,19 @@
   }
 }
 
-.forecast-container.weather-bg-rain > * {
+.forecast-page.weather-bg-rain > * {
   position: relative;
   z-index: 2;
 }
 
 /* Thunderstorm Background */
-.forecast-container.weather-bg-thunderstorm {
+.forecast-page.weather-bg-thunderstorm {
   background: linear-gradient(135deg, #37474f 0%, #455a64 100%);
   animation: lightning-flash 0.15s ease-out infinite;
   position: relative;
 }
 
-.forecast-container.weather-bg-thunderstorm::before {
+.forecast-page.weather-bg-thunderstorm::before {
   content: '';
   position: fixed;
   top: 0;
@@ -87,7 +127,7 @@
   z-index: 1;
 }
 
-.forecast-container.weather-bg-thunderstorm > * {
+.forecast-page.weather-bg-thunderstorm > * {
   position: relative;
   z-index: 2;
 }
@@ -105,12 +145,12 @@
 }
 
 /* Snow Background */
-.forecast-container.weather-bg-snow {
+.forecast-page.weather-bg-snow {
   background: linear-gradient(135deg, #e8f4f8 0%, #ffffff 100%);
   position: relative;
 }
 
-.forecast-container.weather-bg-snow::before {
+.forecast-page.weather-bg-snow::before {
   content: '';
   position: fixed;
   top: 0;
@@ -135,18 +175,18 @@
   }
 }
 
-.forecast-container.weather-bg-snow > * {
+.forecast-page.weather-bg-snow > * {
   position: relative;
   z-index: 2;
 }
 
 /* Mist/Fog Background */
-.forecast-container.weather-bg-mist {
+.forecast-page.weather-bg-mist {
   background: linear-gradient(135deg, #cfd8dc 0%, #eceff1 100%);
   position: relative;
 }
 
-.forecast-container.weather-bg-mist::before {
+.forecast-page.weather-bg-mist::before {
   content: '';
   position: fixed;
   top: 0;
@@ -168,47 +208,26 @@
   }
 }
 
-.forecast-container.weather-bg-mist > * {
+.forecast-page.weather-bg-mist > * {
   position: relative;
   z-index: 2;
 }
 
-/* Default Background */
-.forecast-container.weather-bg-default {
-  background: linear-gradient(135deg, #f0f4f8 0%, #e8f1f7 100%);
-}
-
-.header-section {
-  margin-bottom: 2rem;
-  padding: 1rem 0;
-}
-
-.back-button {
-  margin-bottom: 1rem;
-}
-
-.location-info {
-  padding: 1rem 0;
-}
-
-.location-info h1 {
-  font-size: 2.5rem;
-  font-weight: 600;
-  margin: 0 0 0.5rem 0;
-  color: #161616;
-}
-
-.location-info p {
-  font-size: 1.125rem;
-  color: #525252;
-  margin: 0;
+/* Content Area */
+.forecast-content {
+  flex: 1;
+  padding: 3rem 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .forecast-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
   width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 .forecast-loading {
@@ -221,20 +240,59 @@
   z-index: 3;
 }
 
+.back-button {
+  margin-bottom: 1rem;
+}
+
+.floating-back-button {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.floating-back-button:hover {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-page.night-mode .floating-back-button {
+  background: rgba(22, 22, 22, 0.85);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f4f4f4;
+}
+
 @media (max-width: 768px) {
-  .forecast-container {
-    padding: 1rem;
+  .forecast-nav-bar {
+    padding: 0.75rem 1rem;
   }
 
-  .location-info h1 {
-    font-size: 1.75rem;
-  }
-
-  .location-info p {
+  .nav-brand {
     font-size: 1rem;
   }
 
+  .nav-location {
+    font-size: 0.75rem;
+  }
+
+  .forecast-content {
+    padding: 1.5rem 1rem;
+  }
+
   .forecast-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .floating-back-button {
+    bottom: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
   }
 }
