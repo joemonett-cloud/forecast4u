@@ -51,7 +51,7 @@ export default function WeatherForecast() {
 
         // Then get the forecast using coordinates
         const forecastResponse = await fetch(
-          `https://api.openweathermap.org/data/2.5/forecast?lat=${geoData.lat}&lon=${geoData.lon}&units=metric&appid=${API_KEY}`
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${geoData.lat}&lon=${geoData.lon}&units=imperial&appid=${API_KEY}`
         )
 
         if (!forecastResponse.ok) {
